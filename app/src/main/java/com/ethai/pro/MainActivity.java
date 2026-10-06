@@ -94,10 +94,11 @@ public class MainActivity extends Activity {
                 score=Math.max(0.05,Math.min(0.95,score));
                 double up=score*100, down=(1-score)*100;
                 String dir=score>=0.5 ? "صعود" : "هبوط";
-                runOnUiThread(() -> {
-                    price.setText(String.format("السعر: %.2f USDT", close));
-                    signal.setText("الاتجاه المتوقع: "+dir);
-                    probs.setText(String.format("الصعود: %.2f%%    الهبوط: %.2f%%",up,down));
+                final double finalClose = close; final double finalUp = up; final double finalDown = down; final String finalDir = dir;
+ runOnUiThread(() -> {
+                    price.setText(String.format("السعر: %.2f USDT", finalClose));
+                    signal.setText("الاتجاه المتوقع: "+finalDir);
+                    probs.setText(String.format("الصعود: %.2f%%    الهبوط: %.2f%%",finalUp,finalDown));
                     status.setText("الحالة: تم تحديث 60 شمعة من Binance");
                 });
             } catch(Exception e) {
